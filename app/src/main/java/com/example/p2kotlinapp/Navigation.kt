@@ -3,12 +3,16 @@ package com.example.p2kotlinapp
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -74,6 +78,7 @@ fun DetailScreen(navController: NavController) {
         Button(
             onClick = {
                 navController.popBackStack()
+                      // the back button, takes the top layer and removes it
             },
             modifier = Modifier.align(CenterHorizontally)
         ) {
@@ -81,3 +86,31 @@ fun DetailScreen(navController: NavController) {
         }
     }
 }
+
+
+@Composable
+fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
+    Scaffold(
+        bottomBar = {
+            BottomAppBar(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.primary,
+            ) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                    Button(onClick = { /*TODO*/ }) {
+                        Text(text = "Hello There!")
+                    }
+                    Button(onClick = { /*TODO*/ }) {
+                        Text(text = "Hello")
+                    }
+                    Button(onClick = { /*TODO*/ }) {
+                        Text(text = "Hi")
+                    }
+                }
+            }
+        }
+    ) {
+        // Your main content goes here
+    }
+}
+
