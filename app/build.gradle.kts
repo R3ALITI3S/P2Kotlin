@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    id("kotlin-kapt")
 }
 
 android {
@@ -80,5 +81,11 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Retrofit with Scalar Converter
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    //Room
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
 }
