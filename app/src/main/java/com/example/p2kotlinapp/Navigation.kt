@@ -30,7 +30,7 @@ fun Navigation() {
         composable(
             route = Screen.DetailScreen.route
         ) {
-            DetailScreen()
+            DetailScreen(navController = navController)
         }
     }
 }
@@ -56,11 +56,28 @@ fun MainScreen(navController: NavController) {
 }
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(navController: NavController) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
         Text(text = "Hello There!")
+    }
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 50.dp)
+    ) {
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            onClick = {
+                navController.popBackStack()
+            },
+            modifier = Modifier.align(CenterHorizontally)
+        ) {
+            Text(text = "To MainScreen")
+        }
     }
 }
