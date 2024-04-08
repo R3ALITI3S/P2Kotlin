@@ -10,21 +10,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavType
-import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 
 @Composable
@@ -36,34 +29,26 @@ fun Navigation() {
         }
         composable(
             route = Screen.DetailScreen.route
-        ) { entry ->
-            DetailScreen(name = entry.arguments?.getString("name"))
+        ) {
+            DetailScreen()
         }
     }
 }
 
 @Composable
 fun MainScreen(navController: NavController) {
-    /* var text by remember {
-        mutableStateOf("")
-    } */
     Column (
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 50.dp)
     ) {
-        /*TextField(value = text, onValueChange = {
-            text = it
-        },
-            modifier = Modifier.fillMaxWidth()
-        ) */
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = {
                 navController.navigate(Screen.DetailScreen.route) //withArgs(text) could be used
             },
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier.align(CenterHorizontally)
         ) {
             Text(text = "To DetailScreen")
         }
@@ -71,11 +56,11 @@ fun MainScreen(navController: NavController) {
 }
 
 @Composable
-fun DetailScreen(name:String?) {
+fun DetailScreen() {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = "Hello")
+        Text(text = "Hello There!")
     }
 }
