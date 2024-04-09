@@ -1,8 +1,7 @@
-package com.example.p2kotlinapp
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.lifecycleScope
+import com.example.p2kotlinapp.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,12 +13,10 @@ import retrofit2.http.Query
 
 class MainActivity : ComponentActivity() {
 
-    // Step 5: Pass the JSON response
     data class WeatherResponse(
         val name: String,
         val main: Main,
         val weather: List<Weather>
-
     )
 
     data class Main(
@@ -37,39 +34,34 @@ class MainActivity : ComponentActivity() {
     )
 
     interface WeatherService {
-        @GET("Weather")
+        @GET("weather")
         suspend fun getWeather(
             @Query("q") city: String,
             @Query("appid") apiKey: String
         ): WeatherResponse
     }
-    // CODE SHIT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_your_layout)
 
-        // Define your Retrofit instance
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .baseUrl("https://openweathermap.org/weathermap")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // Define your WeatherService interface
         val service = retrofit.create(WeatherService::class.java)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             try {
-                val response = service.getWeather("New York", "your_api_key_here")
-                // Update UI with weather data (on the main thread)
+                val response = service.getWeather("New York", "e99786d5749a804fa900b44629711d41")
                 withContext(Dispatchers.Main) {
-                    // Handle the weather response
                     handleWeatherResponse(response)
                 }
             } catch (e: HttpException) {
-                // Handle network errors
+                println("Network error: ${e.message()}")
             } catch (e: Exception) {
-                // Handle other exceptions
+                println("Error: ${e.message}")
             }
         }
     }
@@ -77,9 +69,6 @@ class MainActivity : ComponentActivity() {
     private fun handleWeatherResponse(weatherResponse: WeatherResponse) {
         val cityName = weatherResponse.name
         val temperature = weatherResponse.main.temp
+        println("City: $cityName, Temperature: $temperature")
     }
 }
-
-
-
-
