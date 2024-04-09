@@ -1,6 +1,8 @@
 package com.example.p2kotlinapp
 
 import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +15,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var webView: WebView
+
         data class WeatherResponse(
             val name: String,
             val main: Main,
@@ -45,7 +50,18 @@ class MainActivity : ComponentActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_your_layout)
 
-            val retrofit = Retrofit.Builder()
+
+            webView = findViewById(R.id.webView)
+
+            // Load URL
+            val url = "https://openweathermap.org/weathermap/"
+            webView.loadUrl(url)
+
+            // Force links and redirects to open in the WebView instead of in a browser
+            webView.webViewClient = WebViewClient()
+
+
+           val retrofit = Retrofit.Builder()
                 .baseUrl("https://openweathermap.org/weathermap/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -54,7 +70,7 @@ class MainActivity : ComponentActivity() {
 
             lifecycleScope.launch {
                 try {
-                    val response = service.getWeather("New York", "e99786d5749a804fa900b44629711d41")
+                    val response = service.getWeather("Aalborg", "e99786d5749a804fa900b44629711d41")
                     withContext(Dispatchers.Main) {
                         handleWeatherResponse(response)
                     }
