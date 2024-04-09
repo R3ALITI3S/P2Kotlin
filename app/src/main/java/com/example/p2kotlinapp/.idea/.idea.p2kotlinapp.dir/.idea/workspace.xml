@@ -10,9 +10,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2eqwKGNQ47yOsIYRD2M14sgzXM3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,7 +23,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Navigation",
+    "git-widget-placeholder": "Internet",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -43,6 +43,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712645357488</updated>
       <workItem from="1712645361719" duration="78000" />
+      <workItem from="1712648758543" duration="11000" />
     </task>
     <servers />
   </component>
