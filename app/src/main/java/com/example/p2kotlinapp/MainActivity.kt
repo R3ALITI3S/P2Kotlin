@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     data class WeatherData(
         val name: String,
+        val description: String,
         val main: Main, // temp
         val uvi: Uvi,
         val windSpeed: WindSpeed,
@@ -23,16 +24,16 @@ class MainActivity : AppCompatActivity() {
         val temp: Double
     )
 
+    data class Weather(
+        val icon: String
+    )
+
     data class Uvi(
         val uvi: Double
     )
 
     data class WindSpeed (
         val wind_speed: Double
-    )
-
-    data class Weather(
-        val icon: String
     )
 
     private val apiKey = "e99786d5749a804fa900b44629711d41"
@@ -59,12 +60,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(weatherData: WeatherData) {
         findViewById<TextView>(R.id.textViewCity).text = weatherData.name
-        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.uvi}"
-        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.windSpeed}"
         findViewById<TextView>(R.id.textViewTemperature).text =
             "${weatherData.main.temp.toInt()-273}°C"
+        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.uvi}"
+        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.windSpeed}"
+        findViewById<TextView>(R.id.textViewDes).text = weatherData.description
+
         val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
-
-
     }
 }

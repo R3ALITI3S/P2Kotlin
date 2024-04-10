@@ -23,11 +23,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
+    <TextView
+        android:id="@+id/textViewDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="20sp"
+        android:layout_below="@id/textViewTemperature"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
     <ImageView
         android:id="@+id/imageViewWeatherIcon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/textViewTemperature"
+        android:layout_below="@id/textViewDes"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
@@ -35,9 +45,9 @@
         android:id="@+id/textViewUVI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewCity"
+        android:layout_below="@id/imageViewWeatherIcon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="245dp"
+        android:layout_marginTop="20dp"
         android:text="Uvi"
         android:textSize="48sp" />
 
@@ -45,9 +55,9 @@
         android:id="@+id/textViewWind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewCity"
+        android:layout_below="@id/textViewUVI"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="357dp"
+        android:layout_marginTop="20dp"
         android:text="Wind Speed"
         android:textSize="48sp" />
 
