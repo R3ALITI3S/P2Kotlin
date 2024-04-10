@@ -1,90 +1,70 @@
 package com.example.p2kotlinapp
 
 import android.os.Bundle
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import androidx.activity.ComponentActivity
-import androidx.lifecycle.lifecycleScope
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
+class MainActivity : AppCompatActivity() {
 
-class MainActivity : ComponentActivity() {
+    data class WeatherData(
+        val name: String,
+        val main: Main, // temp
+        val uvi: Uvi,
+        val windSpeed: WindSpeed,
+        val weather: List<Weather>
+    )
 
-    private lateinit var webView: WebView
+    data class Main(
+        val temp: Double
+    )
 
-        data class WeatherResponse(
-            val name: String,
-            val main: Main,
-            val weather: List<Weather>
-        )
+    data class Uvi(
+        val uvi: Double
+    )
 
-        data class Main(
-            val temp: Double,
-            val feelsLike: Double,
-            val tempMin: Double,
-            val tempMax: Double,
-            val pressure: Int,
-            val humidity: Int
-        )
+    data class WindSpeed (
+        val wind_speed: Double
+    )
 
-        data class Weather(
-            val description: String,
-            val icon: String
-        )
+    data class Weather(
+        val icon: String
+    )
 
-        interface WeatherService {
-            @GET("weather")
-            suspend fun getWeather(
-                @Query("q") city: String,
-                @Query("appid") apiKey: String
-            ): WeatherResponse
-        }
+    private val apiKey = "e99786d5749a804fa900b44629711d41"
+    private lateinit var weatherService: WeatherService
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_your_layout)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
+        weatherService = Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(WeatherService::class.java)
 
-            webView = findViewById(R.id.webView)
-
-            // Load URL
-            val url = "https://openweathermap.org/weathermap/"
-            webView.loadUrl(url)
-
-            // Force links and redirects to open in the WebView instead of in a browser
-            webView.webViewClient = WebViewClient()
-
-
-           val retrofit = Retrofit.Builder()
-                .baseUrl("https://openweathermap.org/weathermap/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val service = retrofit.create(WeatherService::class.java)
-
-            lifecycleScope.launch {
-                try {
-                    val response = service.getWeather("Aalborg", "e99786d5749a804fa900b44629711d41")
-                    withContext(Dispatchers.Main) {
-                        handleWeatherResponse(response)
-                    }
-                } catch (e: HttpException) {
-                    println("Network error: ${e.message()}")
-                } catch (e: Exception) {
-                    println("Error: ${e.message}")
-                }
+        // Replace "CityName" with the desired city
+        GlobalScope.launch(Dispatchers.IO) {
+            val weatherData = weatherService.getWeather("Aalborg", apiKey)
+            withContext(Dispatchers.Main) {
+                updateUI(weatherData)
             }
         }
-
-        private fun handleWeatherResponse(weatherResponse: WeatherResponse) {
-            val cityName = weatherResponse.name
-            val temperature = weatherResponse.main.temp
-            println("City: $cityName, Temperature: $temperature")
-        }
     }
+
+    private fun updateUI(weatherData: WeatherData) {
+        findViewById<TextView>(R.id.textViewCity).text = weatherData.name
+        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.uvi}"
+        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.windSpeed}"
+        findViewById<TextView>(R.id.textViewTemperature).text =
+            "${weatherData.main.temp.toInt()-273}°C"
+        val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
+
+
+    }
+}
