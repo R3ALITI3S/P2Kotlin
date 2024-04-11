@@ -14,11 +14,10 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideWeatherService(): WeatherService {
+    fun provideWeatherApi(): WeatherService {
         return Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com/")
             .addConverterFactory(MoshiConverterFactory.create())
-            .build()
             .create(WeatherService::class.java)
     }
 }

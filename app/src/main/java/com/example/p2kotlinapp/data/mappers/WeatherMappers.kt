@@ -1,13 +1,11 @@
 package com.example.p2kotlinapp.data.mappers
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.p2kotlinapp.data.remote.WeatherDataDto
 import com.example.p2kotlinapp.weather.WeatherData
+import com.example.p2kotlinapp.weather.WeatherType
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun WeatherDataDto.toWeatherDataMap() : Map<Int, List<WeatherData>> {
     return time.mapIndexed { index, time ->
         val temperature = temperatures[index]
@@ -23,7 +21,7 @@ fun WeatherDataDto.toWeatherDataMap() : Map<Int, List<WeatherData>> {
             pressure = pressure,
             windSpeed = windSpeed,
             humidity = humidity,
-            // weatherType = WeatherType.fromWMO(weatherCode)
+            weatherType = WeatherType.fromWMO(weatherCode)
 
         )
     }.groupBy {
