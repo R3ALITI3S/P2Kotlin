@@ -3,7 +3,6 @@ package com.example.p2kotlinapp
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     data class Main(
-        val temp: Double,
+        val temperature_2m: Double,
         val summary: String,
         val pressure: Int,
         val windSpeed: Double,
@@ -48,30 +47,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fun provideApi() : WeatherService {
-            return Retrofit.Builder()
-                .baseUrl("https://api.open-meteo.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(WeatherService::class.java)
-             println("stuff is working right?")
-        }
-
+        provideApi()
 
         // Replace "CityName" with the desired city
         GlobalScope.launch(Dispatchers.IO) {
             val weatherData = weatherService.getWeather(57.046263, 9.921526)
             withContext(Dispatchers.Main) {
                 updateUI(weatherData)
+
+                println("stuff is working right?")
             }
         }
+    }
+
+    private fun provideApi() : WeatherService {
+
+        println("Provides the Api")
+
+        return Retrofit.Builder()
+            .baseUrl("https://api.open-meteo.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(WeatherService::class.java)
     }
 
     private fun updateUI(weatherData: WeatherData) {
         findViewById<TextView>(R.id.textViewCity).text = weatherData.name
         findViewById<TextView>(R.id.textViewDes).text = weatherData.main.summary
-        findViewById<TextView>(R.id.textViewTemperature).text =
-            "${weatherData.main.temp.toInt()-273}°C"
+      //  findViewById<TextView>(R.id.textViewTemperature).text =  "${weatherData.main.temp.toInt()-273}°C"
         findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.main.pressure}"
         findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
         findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
