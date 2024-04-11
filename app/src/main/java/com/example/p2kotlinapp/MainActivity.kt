@@ -25,7 +25,6 @@ const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
     // Den starter her :)
-    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -83,7 +82,6 @@ class MainActivity : AppCompatActivity() {
             "${weatherData.main.temp.toInt()-273}°C"
         findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.main.pressure}"
         findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
-        findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
 
         // val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
     }
