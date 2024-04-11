@@ -18,6 +18,8 @@ object AppModule {
         return Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com/")
             .addConverterFactory(MoshiConverterFactory.create())
+            .build()
             .create(WeatherService::class.java)
+
     }
 }
