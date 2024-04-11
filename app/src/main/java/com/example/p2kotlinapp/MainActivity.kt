@@ -5,6 +5,7 @@ import android.net.http.HttpException
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresExtension
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
     // Den starter her :)
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -42,46 +44,30 @@ class MainActivity : AppCompatActivity() {
                     val response = try {
                         Retrofitinstance.api.getTodos()
                         val response: Response<WeatherData> = Retrofitinstance.api.getTodos()
-                        UpdateUI()
+                        updateUI(WeatherData())
                     } catch (e: IOException) {
                         Log.e(TAG, "IOException: ${e.message}", e)
                     } catch (e: HttpException) {
                         Log.e(TAG, "HttpException: ${e.message}", e)
                         return@launchWhenCreated
                     }
-                   // if (response.isSuccessful && response.body() != null) {
+                    // if (response.isSuccessful && response.body() != null) {
 
-                //} else {
-                        Log.e(TAG, "Response not successful")
-                //    }
+                    //} else {
+                    Log.e(TAG, "Response not successful")
+                    //    }
 
                 }
             }
         }
-
-//        // Replace "CityName" with the desired city
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val weatherData = weatherService.getWeather("Aalborg", apiKey)
-//            withContext(Dispatchers.Main) {
-//                updateUI(weatherData)
-//            }
-//        }
     }
 
-    fun getWeatherData() = runBlocking {
-        val weatherGetter : WeatherGetter = WeatherGetter()
-        launch { weatherGetter.getWeatherData() }
-
-
-    }
-
-    private fun updateUI(weatherData: WeatherData) {
-        findViewById<TextView>(R.id.textViewCity).text = weatherData.name
-        findViewById<TextView>(R.id.textViewDes).text = weatherData.main.summary
-        findViewById<TextView>(R.id.textViewTemperature).text =
-            "${weatherData.main.temp.toInt()-273}°C"
-        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.main.pressure}"
-        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
+    fun updateUI(weatherData: WeatherData) {
+        findViewById<TextView>(R.id.textViewCity).text // = weatherData
+        findViewById<TextView>(R.id.textViewDes).text = "${weatherData.isDay}"// = weatherData // summary
+        findViewById<TextView>(R.id.textViewTemperature).text  // = "${weatherData.main.temp.toInt()-273}°C"
+        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.rainFall}"// = "${weatherData.main.pressure}"
+        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.cloudCover}"
 
         // val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
     }
