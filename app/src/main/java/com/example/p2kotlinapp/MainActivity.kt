@@ -3,6 +3,8 @@ package com.example.p2kotlinapp
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.p2kotlinapp.data.remote.WeatherDto
+import com.example.p2kotlinapp.data.remote.WeatherService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -56,22 +58,22 @@ class MainActivity : AppCompatActivity() {
 
         // Replace "CityName" with the desired city
         GlobalScope.launch(Dispatchers.IO) {
-            val weatherData = weatherService.getWeather("Aalborg", apiKey)
+            val weatherData = weatherService.getWeather(57.046263, 9.921526)
             withContext(Dispatchers.Main) {
                 updateUI(weatherData)
             }
         }
     }
 
-    private fun updateUI(weatherData: WeatherData) {
-        findViewById<TextView>(R.id.textViewCity).text = weatherData.name
-        findViewById<TextView>(R.id.textViewDes).text = weatherData.main.summary
-        findViewById<TextView>(R.id.textViewTemperature).text =
-            "${weatherData.main.temp.toInt()-273}°C"
-        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.main.pressure}"
-        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
-        findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
-
-        val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
+    private fun updateUI(weatherData: WeatherDto) {
+        findViewById<TextView>(R.id.textViewCity).text = weatherData.toString()
+//        findViewById<TextView>(R.id.textViewDes).text = weatherData.main.summary
+//        findViewById<TextView>(R.id.textViewTemperature).text =
+//            "${weatherData.main.temp.toInt()-273}°C"
+//        findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.main.pressure}"
+//        findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
+//        findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
+//
+//        val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
     }
 }
