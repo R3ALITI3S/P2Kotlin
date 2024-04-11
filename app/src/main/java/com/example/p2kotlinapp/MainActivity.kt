@@ -18,14 +18,17 @@ class MainActivity : AppCompatActivity() {
         val main: Main, // temp
         val second: Second,
         val windSpeed: Main,
+        val rain: Main,
         val weather: List<Weather>
+
     )
 
     data class Main(
         val temp: Double,
         val summary: String,
         val pressure: Int,
-        val windSpeed: Double
+        val windSpeed: Double,
+        val rain: Double
     )
 
 
@@ -67,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             "${weatherData.main.temp.toInt()-273}°C"
         findViewById<TextView>(R.id.textViewUVI).text = "${weatherData.main.pressure}"
         findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
+        findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
 
         val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
     }

@@ -52,10 +52,20 @@
         android:textSize="48sp" />
 
     <TextView
-        android:id="@+id/textViewWind"
+        android:id="@+id/textViewRain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewUVI"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Rain"
+        android:textSize="48sp" />
+
+    <TextView
+        android:id="@+id/textViewWind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewRain"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Wind Speed"
