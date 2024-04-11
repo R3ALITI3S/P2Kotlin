@@ -3,6 +3,7 @@ package com.example.p2kotlinapp
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -41,22 +42,25 @@ class MainActivity : AppCompatActivity() {
         val icon: String
     )
 
-    private val apiKey = "e99786d5749a804fa900b44629711d41"
     private lateinit var weatherService: WeatherService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        weatherService = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(WeatherService::class.java)
+        fun provideApi() : WeatherService {
+            return Retrofit.Builder()
+                .baseUrl("https://api.open-meteo.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(WeatherService::class.java)
+             println("stuff is working right?")
+        }
+
 
         // Replace "CityName" with the desired city
         GlobalScope.launch(Dispatchers.IO) {
-            val weatherData = weatherService.getWeather("Aalborg", apiKey)
+            val weatherData = weatherService.getWeather(57.046263, 9.921526)
             withContext(Dispatchers.Main) {
                 updateUI(weatherData)
             }
@@ -72,6 +76,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
         findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
 
-        val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
+       // val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
     }
 }
+
+
+
+
