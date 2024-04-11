@@ -1,66 +1,79 @@
 package com.example.p2kotlinapp
 
+import android.content.ContentValues.TAG
+import android.net.http.HttpException
+import android.os.Build
 import android.os.Bundle
-import android.widget.TextView
+import android.util.Log
+import androidx.activity.compose.setContent
+import androidx.annotation.RequiresExtension
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
+import com.example.p2kotlinapp.ui.theme.P2KotlinAppTheme
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.runBlocking
+import java.io.IOException
+import retrofit2.Response
+
+
+const val TAG = "MainActivity"
+
 class MainActivity : AppCompatActivity() {
 
-    data class WeatherData(
-        val name: String,
-        val press: Main,
-        val description: Main,
-        val main: Main, // temp
-        val second: Second,
-        val windSpeed: Main,
-        val rain: Main,
-        val weather: List<Weather>
-
-    )
-
-    data class Main(
-        val temp: Double,
-        val summary: String,
-        val pressure: Int,
-        val windSpeed: Double,
-        val rain: Double
-    )
-
-
-
-    data class Second(
-        val uvi: Double
-    )
-
-    data class Weather(
-        val icon: String
-    )
-
-    private val apiKey = "e99786d5749a804fa900b44629711d41"
-    private lateinit var weatherService: WeatherService
-
+    // Den starter her :)
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent {
+            P2KotlinAppTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                )
+                {
+                    setContentView(R.layout.activity_main)
+                }
 
-        weatherService = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(WeatherService::class.java)
+                lifecycleScope.launchWhenCreated {
+                    val response = try {
+                        Retrofitinstance.api.getTodos()
+                        val response: Response<WeatherData> = Retrofitinstance.api.getTodos()
+                        UpdateUI()
+                    } catch (e: IOException) {
+                        Log.e(TAG, "IOException: ${e.message}", e)
+                    } catch (e: HttpException) {
+                        Log.e(TAG, "HttpException: ${e.message}", e)
+                        return@launchWhenCreated
+                    }
+                   // if (response.isSuccessful && response.body() != null) {
 
-        // Replace "CityName" with the desired city
-        GlobalScope.launch(Dispatchers.IO) {
-            val weatherData = weatherService.getWeather("Aalborg", apiKey)
-            withContext(Dispatchers.Main) {
-                updateUI(weatherData)
+                //} else {
+                        Log.e(TAG, "Response not successful")
+                //    }
+
+                }
             }
         }
+
+//        // Replace "CityName" with the desired city
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val weatherData = weatherService.getWeather("Aalborg", apiKey)
+//            withContext(Dispatchers.Main) {
+//                updateUI(weatherData)
+//            }
+//        }
+    }
+
+    fun getWeatherData() = runBlocking {
+        val weatherGetter : WeatherGetter = WeatherGetter()
+        launch { weatherGetter.getWeatherData() }
+
+
     }
 
     private fun updateUI(weatherData: WeatherData) {
@@ -72,6 +85,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewWind).text = "${weatherData.main.windSpeed}"
         findViewById<TextView>(R.id.textViewRain).text = "${weatherData.main.rain}"
 
-        val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
+        // val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
     }
 }
