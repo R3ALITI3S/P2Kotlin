@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     fun updateUI(weatherData: WeatherData) {
         findViewById<TextView>(R.id.textViewCity).text // = weatherData
         findViewById<TextView>(R.id.textViewDes).text = "${weatherData.isDay}"// = weatherData // summary
