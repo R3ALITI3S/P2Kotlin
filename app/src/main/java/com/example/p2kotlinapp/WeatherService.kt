@@ -7,7 +7,6 @@ interface WeatherService {
         @GET("weather")
         suspend fun getWeather(
             @Query("q") city: String,
-            @Query("appid") apiKey: String
+            @Query("apiKey") apiKey: String
         ): MainActivity.WeatherData
-
 }
