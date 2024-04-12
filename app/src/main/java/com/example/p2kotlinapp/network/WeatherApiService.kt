@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = ""
+private const val BASE_URL = "https://api.open-meteo.com"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(ScalarsConverterFactory.create())
@@ -12,7 +12,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface WeatherApiService {
-    @GET("")
+    @GET("/v1/forecast?latitude=57.0488&longitude=9.9217&current=is_day,rain,cloud_cover&wind_speed_unit=ms&timezone=Europe%2FBerlin")
     suspend fun getCurrentWeather(): String
 }
 
