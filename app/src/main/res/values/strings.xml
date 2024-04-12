@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">P2KotlinApp</string>
+    <string name = "waterplant">Water Your Plant</string>
 </resources>
