@@ -18,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -87,9 +89,8 @@ fun DetailScreen(navController: NavController) {
     }
 }
 
-
 @Composable
-fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
+fun ScaffoldExample() {
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -113,3 +114,5 @@ fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
         // Your main content goes here
     }
 }
+
+
