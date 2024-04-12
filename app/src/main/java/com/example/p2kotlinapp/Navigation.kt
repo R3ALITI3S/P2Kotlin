@@ -47,6 +47,7 @@ fun MainScreen(navController: NavController) {
             .fillMaxWidth()
             .padding(horizontal = 50.dp)
     ) {
+
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = {
@@ -65,7 +66,7 @@ fun DetailScreen(navController: NavController) {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = "Hello There!")
+        Text(text = "Du er på Skærm 2!")
     }
     Column(
         verticalArrangement = Arrangement.Center,
@@ -97,13 +98,13 @@ fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
             ) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                     Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Hello There!")
+                        Text(text = "Left Button!")
                     }
                     Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Hello")
+                        Text(text = "Middle Button!")
                     }
                     Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Hi")
+                        Text(text = "Right Button!")
                     }
                 }
             }
