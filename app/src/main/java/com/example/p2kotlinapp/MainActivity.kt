@@ -60,7 +60,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Navigation()
                     val state = viewModel.state.collectAsState()
-
                 }
             }
         }

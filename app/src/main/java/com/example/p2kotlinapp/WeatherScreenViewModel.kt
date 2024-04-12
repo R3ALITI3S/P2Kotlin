@@ -19,16 +19,22 @@ class WeatherScreenViewModel: ViewModel() {
     private var _state: WeatherScreenState by mutableStateOf(WeatherScreenState.Loading)
     val state = MutableStateFlow(_state)
     init {
+        println("Initializing Weather Screen ViewModel")
         getCurrentWeatherData()
     }
 
     private fun getCurrentWeatherData() {
+        println("Launching coroutine..")
         viewModelScope.launch {
+            println("Coroutine launched!")
             _state = try {
+                println("Getting weather data...")
                 val result = WeatherApi.retrofitService.getCurrentWeather()
+                println("Weather data got!")
                 WeatherScreenState.Succes(result)
             }
             catch (e :IOException) {
+                println("Failed to get weather data.")
                 WeatherScreenState.Error
             }
         }
