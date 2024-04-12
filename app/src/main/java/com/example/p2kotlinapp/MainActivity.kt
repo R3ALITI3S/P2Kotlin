@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingPreview()
+                    MainScreen()
                 }
             }
         }
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview(modifier: Modifier = Modifier) {
+fun MainScreen(modifier: Modifier = Modifier) {
     Box(modifier = Modifier.fillMaxSize()
     ){
         Button(
@@ -63,6 +63,18 @@ fun GreetingPreview(modifier: Modifier = Modifier) {
             onClick = { Log.d("tag","tesy")}
         ) {
             Text(text = (stringResource(id = R.string.waterplant)), modifier = Modifier)
+        }
+
+        Button(
+            modifier = Modifier
+                .height(96.dp)
+                .width(360.dp)
+                .align(Alignment.TopCenter)
+                .padding(bottom = 4.dp),
+            enabled = true,
+            onClick = { Log.d("tag","tesy")}
+        ) {
+            Text(text = (stringResource(id = R.string.waterlevel)), modifier = Modifier)
         }
     }
     Column(

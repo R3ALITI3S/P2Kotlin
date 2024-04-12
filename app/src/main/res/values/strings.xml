@@ -2,4 +2,5 @@
     <string name="app_name">P2KotlinApp</string>
     <string name = "waterplant">Water Your Plant</string>
     <string name = "tomatoplant">tomatoplant</string>
+    <string name = "waterlevel">Water Level Current</string>
 </resources>
