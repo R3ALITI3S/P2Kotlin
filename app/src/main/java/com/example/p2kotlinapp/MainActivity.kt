@@ -13,6 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.p2kotlinapp.ui.theme.P2KotlinAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

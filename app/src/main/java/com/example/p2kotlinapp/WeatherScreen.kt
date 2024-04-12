@@ -11,5 +11,6 @@ fun WeatherScreen() {
         Text(text = "Rain: ")
         Text(text = "Clouds: ")
         Text(text = "Is Day: ")
+        Text(text = "Full Response: ")
     }
 }
