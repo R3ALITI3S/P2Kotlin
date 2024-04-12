@@ -21,7 +21,9 @@ class WeatherScreenViewModel: ViewModel() {
     private fun getCurrentWeatherData() {
         viewModelScope.launch {
             val listResult = WeatherApi.retrofitService.getCurrentWeather()
-            _state.update()
+            _state.update {it.copy(
+                fullResponse = listResult
+            )}
         }
     }
 }
