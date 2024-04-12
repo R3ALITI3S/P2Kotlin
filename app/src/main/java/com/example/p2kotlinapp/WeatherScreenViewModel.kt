@@ -16,9 +16,8 @@ import java.io.IOException
 
 class WeatherScreenViewModel: ViewModel() {
 
-    var _state: WeatherScreenState by mutableStateOf(WeatherScreenState.Loading)
-        private set
-    val state = _state
+    private var _state: WeatherScreenState by mutableStateOf(WeatherScreenState.Loading)
+    val state = MutableStateFlow(_state)
     init {
         getCurrentWeatherData()
     }
