@@ -16,7 +16,7 @@ import java.io.IOException
 
 class WeatherScreenViewModel: ViewModel() {
 
-    private var _state: WeatherScreenState by mutableStateOf(WeatherScreenState.Loading)
+    private var _state: WeatherScreenState by mutableStateOf(WeatherScreenState)
     val state = MutableStateFlow(_state)
     init {
         println("Initializing Weather Screen ViewModel")
@@ -26,17 +26,8 @@ class WeatherScreenViewModel: ViewModel() {
     private fun getCurrentWeatherData() {
         println("Launching coroutine..")
         viewModelScope.launch {
-            println("Coroutine launched!")
-            _state = try {
-                println("Getting weather data...")
-                val result = WeatherApi.retrofitService.getCurrentWeather()
-                println("Weather data got!")
-                WeatherScreenState.Succes(result)
-            }
-            catch (e :IOException) {
-                println("Failed to get weather data.")
-                WeatherScreenState.Error
-            }
+            val result = WeatherApi.retrofitService.getCurrentWeather()
+            _state.u
         }
     }
 }
