@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun WeatherScreen(state: WeatherScreenState) {
-
     Column {
         Text(text = "Rain: ${state.rain}")
         Text(text = "Clouds: ${state.cloudy}")
