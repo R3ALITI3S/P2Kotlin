@@ -88,7 +88,7 @@ fun DetailScreen(navController: NavController) {
 }
 
 
-@Composable
+/*@Composable
 fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
     Scaffold(
         bottomBar = {
@@ -110,6 +110,6 @@ fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
             }
         }
     ) {
-        // Your main content goes here
+
     }
-}
+}*/
