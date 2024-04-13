@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    viewModel.getCurrentWeatherData()
                     val state by viewModel.state.collectAsState()
                     WeatherScreen(state)
                 }
