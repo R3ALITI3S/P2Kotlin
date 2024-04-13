@@ -42,56 +42,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    Navigation()
                 }
             }
         }
-    }
-}
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun MainScreen(modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.fillMaxSize()
-    ){
-        Button(
-            modifier = Modifier
-                .height(48.dp)
-                .width(280.dp)
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 4.dp),
-            enabled = true,
-            onClick = { Log.d("tag","tesy")}
-        ) {
-            Text(text = (stringResource(id = R.string.waterplant)), modifier = Modifier)
-        }
-
-        Button(
-            modifier = Modifier
-                .height(96.dp)
-                .width(360.dp)
-                .align(Alignment.TopCenter)
-                .padding(bottom = 4.dp),
-            enabled = true,
-            onClick = { Log.d("tag","tesy")}
-        ) {
-            Text(text = (stringResource(id = R.string.waterlevel)), modifier = Modifier)
-        }
-    }
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-
-
-    ) {
-        Image(
-            painter = painterResource(R.drawable.tomatoplant),
-            contentDescription = "tomatoplant",
-            modifier = Modifier
-                .wrapContentSize()
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = stringResource(tomatoplant), fontSize = 18.sp)
     }
 }
