@@ -36,8 +36,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val state = viewModel.state.collectAsState()
-                    Navigation()
+                    //Left here for future reference
+                    //val state = viewModel.state.collectAsState()
+                    Navigation(viewModel)
                 }
             }
         }

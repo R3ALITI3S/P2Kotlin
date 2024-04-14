@@ -3,4 +3,6 @@
     <string name = "waterplant">Water Your Plant</string>
     <string name = "tomatoplant">tomatoplant</string>
     <string name = "waterlevel">Water Level Current</string>
+    <string name="to_weather_screen">Go to weather details</string>
+    <string name="to_plant_screen">Go to plant screen</string>
 </resources>

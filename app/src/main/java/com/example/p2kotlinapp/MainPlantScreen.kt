@@ -36,7 +36,7 @@ fun MainPlantScreen(navController: NavController, modifier: Modifier = Modifier)
             enabled = true,
             onClick = { Log.d("tag","tesy")}
         ) {
-            Text(text = (stringResource(id = R.string.waterplant)), modifier = Modifier)
+            Text(text = (stringResource(R.string.waterplant)), modifier = Modifier)
         }
 
         Button(
@@ -46,9 +46,9 @@ fun MainPlantScreen(navController: NavController, modifier: Modifier = Modifier)
                 .align(Alignment.TopCenter)
                 .padding(bottom = 4.dp),
             enabled = true,
-            onClick = { Log.d("tag","tesy")}
+            onClick = { navController.navigate(Screen.DetailScreen.route)}
         ) {
-            Text(text = (stringResource(id = R.string.waterlevel)), modifier = Modifier)
+            Text(text = (stringResource(R.string.to_weather_screen)), modifier = Modifier)
         }
     }
     Column(
