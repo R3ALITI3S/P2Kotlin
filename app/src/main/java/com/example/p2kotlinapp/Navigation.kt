@@ -88,28 +88,3 @@ fun DetailScreen(navController: NavController) {
 }
 
 
-@Composable
-fun ScaffoldExample(modifier: java.lang.reflect.Modifier) {
-    Scaffold(
-        bottomBar = {
-            BottomAppBar(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Left Button!")
-                    }
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Middle Button!")
-                    }
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Right Button!")
-                    }
-                }
-            }
-        }
-    ) {
-        // Your main content goes here
-    }
-}
