@@ -33,6 +33,7 @@ class WeatherScreenViewModel: ViewModel() {
             }
             catch (e: Exception) {
                 Log.e("EXCEPTION", "$e.message")
+                success = false
                 "ERROR: $e.message"
             }
 
@@ -50,7 +51,8 @@ class WeatherScreenViewModel: ViewModel() {
                     isDay = when(current.getInt("is_day")) {
                         1 -> true
                         else -> false
-                    }
+                    },
+                    time = current.getInt("time")
                 )
 
                 //saves the extracted weather data to weatherData variable

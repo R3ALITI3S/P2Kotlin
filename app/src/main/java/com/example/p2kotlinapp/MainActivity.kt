@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +16,7 @@ import com.example.p2kotlinapp.ui.theme.P2KotlinAppTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<WeatherScreenViewModel>(
+    private val weatherViewModel by viewModels<WeatherScreenViewModel>(
         factoryProducer = {
             object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -57,7 +56,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Left here for future reference
                     //val state = viewModel.state.collectAsState()
-                    Navigation(viewModel)
+                    Navigation(weatherViewModel, plantViewModel)
                     //val state by viewModel.state.collectAsState()
                     //PlantsTestScreen(state = state, onEvent = viewModel::onEvent)
                 }

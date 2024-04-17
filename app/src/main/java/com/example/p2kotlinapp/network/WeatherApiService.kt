@@ -12,7 +12,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface WeatherApiService {
-    @GET("/v1/forecast?latitude=57.0488&longitude=9.9217&current=is_day,rain,cloud_cover&wind_speed_unit=ms&timezone=Europe%2FBerlin")
+    @GET("/v1/forecast?latitude=57.048&longitude=9.9187&current=is_day,rain,cloud_cover&timeformat=unixtime")
     suspend fun getCurrentWeather(): String
 }
 

@@ -100,6 +100,12 @@ class PlantViewModel(
                     addingPlant = true
                 ) }
             }
+
+            is PlantEvent.UpsertPlant -> {
+                viewModelScope.launch {
+                    dao.upsertPlant(event.plant)
+                }
+            }
         }
     }
 }

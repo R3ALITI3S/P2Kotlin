@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,14 +22,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun Navigation(viewModel: WeatherScreenViewModel) {
+fun Navigation(weatherViewModel: WeatherScreenViewModel, plantViewModel: PlantViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
-            MainPlantScreen(navController = navController)
+            MainPlantScreen(navController = navController, plantViewModel = plantViewModel, weatherViewModel = weatherViewModel)
         }
         composable(route = Screen.DetailScreen.route) {
-            val state = viewModel.state.collectAsState()
+            val state = weatherViewModel.state.collectAsState()
             WeatherScreen(state = state, navController = navController)
         }
     }
