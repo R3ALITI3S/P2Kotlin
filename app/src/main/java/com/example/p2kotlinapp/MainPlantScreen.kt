@@ -31,6 +31,12 @@ const val MAX_HEALTH = 2 //The amount of health stages (-1 because of 0 indexati
 const val MAX_SUN_WATER_DEVIANCY = 20 //How far apart a plant sun and water level is allowed to be apart before loosing health
 const val WATERING_AMOUNT = 10 //How much the plants gets watered when the user presses the watering button
 
+val images: Array<IntArray> = arrayOf(
+    intArrayOf(R.drawable.g0h0, R.drawable.g0h1, R.drawable.g0h2),
+    intArrayOf(R.drawable.g1h0, R.drawable.g1h1, R.drawable.g1h2),
+    intArrayOf(R.drawable.g2h0, R.drawable.g2h1, R.drawable.g2h2)
+)
+
 @Composable
 fun MainPlantScreen(navController: NavController, plantViewModel: PlantViewModel, weatherViewModel: WeatherScreenViewModel, modifier: Modifier = Modifier) {
     val plantState = plantViewModel.state.collectAsState()
@@ -70,12 +76,16 @@ fun MainPlantScreen(navController: NavController, plantViewModel: PlantViewModel
 
 
     ) {
-        Image(
-            painter = painterResource(R.drawable.tomatoplant),
-            contentDescription = "tomatoplant",
-            modifier = Modifier
-                .wrapContentSize()
-        )
+        if (plantState.value.plants.isNotEmpty()) {
+            Image(
+                painter = painterResource(images[plantState.value.plants[0].growth][plantState.value.plants[0].health]),
+                contentDescription = "tomatoplant",
+                modifier = Modifier
+                    .wrapContentSize()
+            )
+        }
+
+
         Spacer(modifier = Modifier.height(16.dp))
         if (plantState.value.plants.isNotEmpty()) { //Only displays plant info if there is info to display
             val oldPlant = plantState.value.plants[0] //Make variable of the old plant for ease of use later
