@@ -13,4 +13,6 @@ sealed interface PlantEvent {
     object HideDialog: PlantEvent
 
     data class DeletePlant(val plant: Plant): PlantEvent
+
+    data class UpsertPlant(val plant: Plant): PlantEvent
 }
