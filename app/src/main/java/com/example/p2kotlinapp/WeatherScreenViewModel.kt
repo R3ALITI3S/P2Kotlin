@@ -26,7 +26,7 @@ class WeatherScreenViewModel: ViewModel() {
 
     fun getCurrentWeatherData() {
         viewModelScope.launch {
-            var success: Boolean = false
+            var success: Boolean
             val listResult: String = try {
                 success = true
                 WeatherApi.retrofitService.getCurrentWeather()

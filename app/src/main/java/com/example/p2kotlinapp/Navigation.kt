@@ -26,7 +26,10 @@ fun Navigation(weatherViewModel: WeatherScreenViewModel, plantViewModel: PlantVi
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
-            MainPlantScreen(navController = navController, plantViewModel = plantViewModel, weatherViewModel = weatherViewModel)
+            MainPlantScreen(navController = navController,
+                plantViewModel = plantViewModel,
+                weatherViewModel = weatherViewModel
+            )
         }
         composable(route = Screen.DetailScreen.route) {
             val state = weatherViewModel.state.collectAsState()
