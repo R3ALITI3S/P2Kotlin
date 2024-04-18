@@ -55,6 +55,17 @@ fun MainPlantScreen(navController: NavController, plantViewModel: PlantViewModel
                 Text(text = (stringResource(R.string.waterplant)), modifier = Modifier)
             }
         }
+        else {
+            plantViewModel.onEvent(PlantEvent.UpsertPlant(Plant(
+                growth = 0,
+                health = 0,
+                water = 0,
+                sun = 0,
+                name = "Tomato",
+                lastCheck = 0,
+                id = 0
+            )))
+        }
 
         Button(
             modifier = Modifier
